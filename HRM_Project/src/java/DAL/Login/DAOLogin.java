@@ -15,12 +15,12 @@ public class DAOLogin extends DBContext {
         Account acc = null;
 
         try {
-            // Hash the input password using SHA-256
-            String hashedPassword = hashPassword(password);
+            // Hash the input password using SHA-256 and convert to binary format
+            byte[] hashedPasswordBytes = hashPasswordToBytes(password);
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, username);
-            statement.setString(2, hashedPassword);
+            statement.setBytes(2, hashedPasswordBytes);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 acc = new Account(rs.getInt(1), rs.getString(2),
@@ -33,13 +33,22 @@ public class DAOLogin extends DBContext {
         return acc;
     }
 
-    private String hashPassword(String password) throws NoSuchAlgorithmException {
+    private byte[] hashPasswordToBytes(String password) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
-        byte[] hashedPasswordBytes = md.digest(password.getBytes());
-        StringBuilder sb = new StringBuilder();
-        for (byte b : hashedPasswordBytes) {
-            sb.append(String.format("%02x", b));
+        return md.digest(password.getBytes());
+    }
+
+    public static void main(String[] args) {
+        DAOLogin login = new DAOLogin();
+        String testEmail = "phongnnhe176274@fpt.edu.vn";
+        String testPassword = "admin";
+        Account acc = login.loginUser(testEmail, testPassword);
+        if (acc != null) {
+            System.out.println("Login successful");
+            System.out.println("UserId: " + acc.getId());
+            System.out.println("Role: " + acc.getRoleId());
+        } else {
+            System.out.println("Login Failed!");
         }
-        return sb.toString();
     }
 }
