@@ -21,8 +21,10 @@
                     <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
                     <h1 class="opacity">LOGIN</h1>
                     <form>
-                        <input type="text" placeholder="username" />
-                        <input type="password" placeholder="password" />
+                        <input type="text" name="username"
+                               placeholder="username" />
+                        <input type="password" name="password"
+                               placeholder="password" />
                         <button class="opacity">SUBMIT</button>
                     </form>
                     <div class="social">
