@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
+        <title>Login</title>
         <link href="${pageContext.request.contextPath}/CSS/login.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
@@ -20,7 +20,7 @@
                         <button type="submit" name="submitLogin" class="opacity">Login</button>
                     </form>   
                     <div class="register-forget opacity">
-                        <a href="#">FORGOT PASSWORD</a>
+                        <a href="#">Forgot Password</a>
                     </div>
                     <c:if test="${not empty mess}">
                         <div class="alert">

@@ -20,7 +20,6 @@ import jakarta.servlet.http.HttpSession;
  */
 public class Login extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,7 +39,7 @@ public class Login extends HttpServlet {
 
             //Check that username and password are not empty
             if (email == null || email.trim().isEmpty() || password == null || password.trim().isEmpty()) {
-                request.setAttribute("mess", "Username or Password can't be empty!");
+                request.setAttribute("mess", "Email or Password can't be empty!");
                 request.getRequestDispatcher("Views/Login/login.jsp").forward(request, response);
                 return;
             }
@@ -57,12 +56,14 @@ public class Login extends HttpServlet {
                     HttpSession session = request.getSession();
                     session.setAttribute("account", account);
                     if (account.getRoleId() == 1) {
-                        response.sendRedirect("Views/Admin/admin.jsp");
+                        response.sendRedirect("admin");
+                    } else if (account.getRoleId() == 4) {
+                        response.sendRedirect("manager");
                     } else if (account.getRoleId() == 5) {
-                        response.sendRedirect("Views/User/Home.jsp");
+                        response.sendRedirect("home");
                     }
                 } else {
-                    request.setAttribute("mess", "Login failed!");
+                    request.setAttribute("mess", "Email or Password is not correct!");
                     request.getRequestDispatcher("Views/Login/login.jsp").forward(request, response);
                 }
             } catch (Exception e) {
