@@ -111,6 +111,7 @@ CREATE TABLE Account (
     employeeId INT NOT NULL,
     dateStart DATE,
     dateEnd DATE,
+    status INT NOT NULL, -- Thêm cột status kiểu số
     FOREIGN KEY (employeeId) REFERENCES Employee(id),
     FOREIGN KEY (roleId) REFERENCES Role(id)
 );
