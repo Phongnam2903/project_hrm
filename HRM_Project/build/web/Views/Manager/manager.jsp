@@ -7,6 +7,6 @@
     </head>
     <body>
         <h1>Welcome to the HRM! Manager</h1>
-        <a href="${pageContext.request.contextPath}/login">Log out</a>
+        <a href="./logout">Log out</a>
     </body>
 </html>
