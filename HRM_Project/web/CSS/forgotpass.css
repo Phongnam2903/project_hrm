@@ -1,16 +1,9 @@
-/*
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-*/
-/* 
-    Created on : Jul 27, 2024, 10:01:14 AM
-    Author     : xuxum
-*/
-
 :root {
     --background: #1a1a2e;
     --color: #ffffff;
     --primary-color: #0f3460;
+    --cancel-color: #f44636;
+    --cancel-hover-color: #d32f2f;
 }
 
 * {
@@ -61,8 +54,8 @@ a {
 }
 
 h1 {
-    font-size: 2.5rem;
-    color: #2f73e8;
+    font-size: 2.2rem;
+    color: #b4c6e6;
 }
 
 .container {
@@ -195,6 +188,65 @@ h1 {
     display: flex;
     justify-content: space-between;
 }
+.cancel-btn {
+    display: block;
+    margin: 1rem 0;
+    padding: 12px;
+    color: var(--color);
+    background-color: var(--cancel-color);
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.modal {
+    display: none; /* Ẩn theo mặc định */
+    position: fixed; /* Ở vị trí cố định */
+    z-index: 1; /* Đặt trên cùng */
+    left: 0;
+    top: 0;
+    width: 100%; /* Chiều rộng toàn màn hình */
+    height: 100%; /* Chiều cao toàn màn hình */
+    overflow: auto; /* Cuộn nếu cần */
+    background-color: rgba(0, 0, 0, 0.4); /* Màu nền đen với độ mờ đục */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Đổ bóng */
+}
+
+.modal-content {
+    background-color: #892121c7; /* Màu nền của nội dung modal */
+    margin: 15% auto; /* Căn giữa theo chiều dọc */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Chiều rộng 80% của màn hình */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Đổ bóng cho nội dung */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer; /* Con trỏ chuột khi di chuột qua */
+    transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: black; /* Màu chữ khi di chuột qua */
+    text-decoration: none;
+}
+
+.cancel-btn:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+    transform: scale(1.02);
+}
+
 .opacity {
     opacity: 0.6;
 }
