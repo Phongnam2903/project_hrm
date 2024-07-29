@@ -6,6 +6,8 @@ package DAL.Login;
 
 import DAL.DBContext;
 import Models.Account;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -16,6 +18,44 @@ import java.util.logging.Logger;
  * @author xuxum
  */
 public class DAOForgot extends DBContext {
+
+    //change password
+    public void changePassword(int id, String newPass) {
+        //Hash the password using SHA-256
+        String hashedPassword = hashPassword(newPass);
+        String sql = "UPDATE Account SET [password] = ? WHERE id = ?";
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setBytes(1, hashedPassword.getBytes()); // Use setBytes to set binary data
+            statement.setInt(2, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            // Handle SQL exception
+            ex.printStackTrace();
+        }
+    }
+
+    private String hashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = digest.digest(password.getBytes());
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hashBytes) {
+                //Convert each Byte to a two-digit hexadecimal representation
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) {
+                    hexString.append('0');
+                }
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            //Handle exception
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     //check Account is exits or not
     public Account checkAccountForChangePass(String emails) {
@@ -45,6 +85,11 @@ public class DAOForgot extends DBContext {
 
         if (account != null) {
             System.out.println("User found: " + testEmail);
+            int userId = account.getId();
+            String newPass = "Phong@17";
+            
+            dao.changePassword(userId, newPass);
+            System.out.println("Password changed successfully for user: " + testEmail);
         } else {
             System.out.println("User not found!");
         }

@@ -34,4 +34,5 @@
             <div class="theme-btn-container"></div>
         </section>
     </body>
+    <script src="${pageContext.request.contextPath}/JS/login.js" type="text/javascript"></script>
 </html>

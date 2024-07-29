@@ -71,7 +71,7 @@ public class ForgotPass extends HttpServlet {
 
             session.setAttribute("resetCode", code);
             session.setAttribute("userEmail", email);
-            response.sendRedirect("Views/Login/resetpassword.jsp");
+            response.sendRedirect("resetpassword");
         } else {
             mess = "Account not exist!!";
             request.setAttribute("mess", mess);
