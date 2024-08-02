@@ -41,7 +41,7 @@ public class DAOLogin extends DBContext {
     public static void main(String[] args) {
         DAOLogin login = new DAOLogin();
         String testEmail = "phongnnhe176274@fpt.edu.vn";
-        String testPassword = "admin";
+        String testPassword = "123";
         Account acc = login.loginUser(testEmail, testPassword);
         if (acc != null) {
             System.out.println("Login successful");
